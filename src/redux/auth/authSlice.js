@@ -2,15 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { contactsApi } from './contactsApi';
 import Cookies from 'js-cookie';
 
-// const token = localStorage.getItem('token')
-//   ? localStorage.getItem('token')
-//   : null;
 const token = Cookies.get('token')
   ? Cookies.get('token')
   : null;
-
-
-
 
 const initialState = {
   user: { name: null, email: null },
@@ -55,7 +49,6 @@ const authSlice = createSlice({
       }
     );
     builder.addMatcher(contactsApi.endpoints.logout.matchFulfilled, state => {
-      localStorage.removeItem('token');
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
